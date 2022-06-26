@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Profiles
 {
-    public class CourseProfile : Profile
+    public class CourseListProfile : Profile
     {
-        public CourseProfile()
+        public CourseListProfile()
         {
             CreateMap<Course, CourseListDTO>()
                 .ForMember(
@@ -50,17 +50,12 @@ namespace Entities.Profiles
 
                 .ForMember(
                     dest => dest.InstructorName,
-                    opt => opt.MapFrom(dest => $"{dest.Instructor.Fullname}")
+                    opt => opt.MapFrom(dest => dest.Instructor.Fullname)
                 )
 
                 .ForMember(
                     dest => dest.CategoryName,
-                    opt => opt.MapFrom(dest => $"{dest.Category.Name}")
-                )
-
-                .ForMember(
-                    dest => dest.TrailerUrl,
-                    opt => opt.MapFrom(dest => $"{dest.TrailerUrl}")
+                    opt => opt.MapFrom(dest => dest.Category.Name)
                 )
 
                 .ForMember(

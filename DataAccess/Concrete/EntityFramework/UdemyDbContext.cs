@@ -1,9 +1,11 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class UdemyDbContext:DbContext
+    public class UdemyDbContext:IdentityDbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
@@ -19,5 +21,12 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Instructor> Instructors { get; set; } = null!;
         public DbSet<Lesson> Lessons { get; set; } = null!;
         public DbSet<LessonVideo> LessonVideos{ get; set; } = null!;
+        public DbSet<T110User> T110Users { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<IdentityUser>().ToTable("Users");
+        }
     }
 }
